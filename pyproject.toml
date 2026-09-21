@@ -3,14 +3,21 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "curveforge"
+name = "curveforge-py"
 version = "1.0.2"
 description = "A graphics-first mathematical curve library powered by NumPy and Matplotlib."
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
 authors = [{ name = "CurveForge Contributors" }]
-keywords = ["curves", "mathematics", "plotting", "geometry", "numpy", "matplotlib"]
+keywords = [
+    "curves",
+    "mathematics",
+    "plotting",
+    "geometry",
+    "numpy",
+    "matplotlib"
+]
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -27,11 +34,14 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-test = ["pytest>=8"]
+test = [
+    "pytest>=8"
+]
 
 [project.urls]
 Homepage = "https://github.com/iampremacharya/CurveForge"
 Repository = "https://github.com/iampremacharya/CurveForge"
+Issues = "https://github.com/iampremacharya/CurveForge/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
