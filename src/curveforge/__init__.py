@@ -5,7 +5,7 @@ from .curves import (
     cycloid, epicycloid, hypocycloid, rose, lemniscate,
 )
 
-__version__ = "1.0.0"
+__version__ = "1.0.2"
 
 __all__ = [
     "Curve", "Circle", "Ellipse", "Parabola", "Hyperbola", "Astroid",
