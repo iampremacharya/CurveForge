@@ -1,12 +1,738 @@
-# CurveForge
+CurveForge
 
-A graphics-first mathematical curve library for Python, powered by NumPy and Matplotlib.
+A graphics-first mathematical curve library for Python.
 
-CurveForge makes it simple to generate, inspect, plot, and export classical mathematical curves using a clean Python API.
+CurveForge lets you generate, inspect, plot, and export classical mathematical curves using a simple Python API built on NumPy and Matplotlib.
 
-## Installation
+If you know the parameters of a curve, you can create and visualize it in a few lines of code.
 
-Install from PyPI:
+PyPI: curveforge-py
+Python import: curveforge
 
-```bash
+Installation
+
+Install CurveForge from PyPI:
+
 pip install curveforge-py
+
+Then import it in Python:
+
+from curveforge import circle
+
+The installation name and import name are different intentionally. pip install uses the PyPI distribution name, while import uses the Python package name.
+
+1. Your First Curve
+
+The easiest way to start is with a circle.
+
+from curveforge import circle
+
+curve = circle(r=5)
+
+curve.show()
+
+That's it.
+
+This creates a circle with radius 5 and opens the graph using Matplotlib.
+
+You can also save it:
+
+from curveforge import circle
+
+curve = circle(r=5)
+
+curve.save("circle.png")
+
+This creates:
+
+circle.png
+
+in your current directory.
+
+2. The Basic CurveForge Workflow
+
+Most CurveForge curves follow the same pattern:
+
+from curveforge import circle
+
+curve = circle(r=5)
+
+curve.points()
+curve.plot()
+curve.show()
+curve.save("circle.png")
+
+You can think of it as:
+
+Create curve
+     ↓
+Get mathematical points
+     ↓
+Plot curve
+     ↓
+Show or save it
+3. Understanding the API
+
+A CurveForge curve gives you several useful things.
+
+.points()
+
+Returns numerical coordinates for the curve.
+
+from curveforge import circle
+
+curve = circle(r=5)
+
+x, y = curve.points()
+
+print(x)
+print(y)
+
+The returned values are NumPy arrays.
+
+You can also choose how many points are generated:
+
+x, y = curve.points(n=2000)
+
+More points generally produce a smoother plotted curve.
+
+.equation
+
+Every curve provides its mathematical equation.
+
+from curveforge import circle
+
+curve = circle(r=5)
+
+print(curve.equation)
+
+Example output:
+
+x² + y² = 5²
+
+This is useful when learning or teaching the mathematics behind the visualization.
+
+.plot()
+
+Use .plot() when you want the Matplotlib axes object.
+
+from curveforge import ellipse
+
+curve = ellipse(a=6, b=3)
+
+ax = curve.plot()
+
+You can then customize the Matplotlib plot:
+
+ax.set_title("My Ellipse")
+
+and display it:
+
+import matplotlib.pyplot as plt
+
+plt.show()
+.show()
+
+For a quick visualization:
+
+from curveforge import astroid
+
+astroid(a=5).show()
+
+This is the simplest way to display a curve.
+
+.save()
+
+Save the curve as an image or vector graphic.
+
+PNG:
+
+curve.save("curve.png")
+
+SVG:
+
+curve.save("curve.svg")
+
+PDF:
+
+curve.save("curve.pdf")
+4. Available Curves
+
+CurveForge currently provides:
+
+Curve	Function	Main parameters
+Circle	circle()	r
+Ellipse	ellipse()	a, b
+Parabola	parabola()	a
+Hyperbola	hyperbola()	a, b
+Astroid	astroid()	a
+Cardioid	cardioid()	a
+Cycloid	cycloid()	r
+Epicycloid	epicycloid()	R, r
+Hypocycloid	hypocycloid()	R, r
+Rose Curve	rose()	a, k
+Lemniscate	lemniscate()	a
+5. Circle
+Mathematical idea
+
+A circle centered at the origin can be represented by:
+
+x² + y² = r²
+Python
+from curveforge import circle
+
+curve = circle(r=5)
+
+print(curve.equation)
+
+curve.show()
+
+You can change the radius:
+
+circle(r=2).show()
+circle(r=5).show()
+circle(r=10).show()
+
+Save it:
+
+circle(r=5).save("circle.png")
+6. Ellipse
+
+An ellipse uses two semi-axis parameters:
+
+a — semi-major/semi-axis parameter
+b — semi-minor/semi-axis parameter
+
+Example:
+
+from curveforge import ellipse
+
+curve = ellipse(a=6, b=3)
+
+print(curve.equation)
+
+curve.show()
+
+Example equation:
+
+x²/6² + y²/3² = 1
+
+Try different shapes:
+
+ellipse(a=8, b=3).show()
+
+or:
+
+ellipse(a=4, b=4).show()
+7. Parabola
+
+Create a parabola using its parameter:
+
+from curveforge import parabola
+
+curve = parabola(a=2)
+
+print(curve.equation)
+
+curve.show()
+
+Change the parameter to explore different shapes:
+
+parabola(a=1).show()
+parabola(a=5).show()
+8. Hyperbola
+
+Create a hyperbola using a and b:
+
+from curveforge import hyperbola
+
+curve = hyperbola(a=5, b=3)
+
+print(curve.equation)
+
+curve.show()
+
+Try:
+
+hyperbola(a=4, b=2).show()
+9. Astroid
+
+An astroid is a four-cusped mathematical curve.
+
+Create one with:
+
+from curveforge import astroid
+
+curve = astroid(a=5)
+
+print(curve.equation)
+
+curve.show()
+
+Example equation:
+
+x = 5 cos³(t), y = 5 sin³(t)
+
+Save it:
+
+astroid(a=5).save("astroid.png")
+10. Cardioid
+
+Create a cardioid with:
+
+from curveforge import cardioid
+
+curve = cardioid(a=4)
+
+print(curve.equation)
+
+curve.show()
+
+Try different values:
+
+cardioid(a=2).show()
+cardioid(a=6).show()
+11. Cycloid
+
+A cycloid is the curve generated by a point on a circle rolling along a straight line.
+
+Create one with:
+
+from curveforge import cycloid
+
+curve = cycloid(r=2)
+
+print(curve.equation)
+
+curve.show()
+
+Change the generating circle radius:
+
+cycloid(r=5).show()
+
+Save it:
+
+cycloid(r=2).save("cycloid.svg")
+12. Epicycloid
+
+An epicycloid is generated by a circle rolling around the outside of another circle.
+
+Create one with:
+
+from curveforge import epicycloid
+
+curve = epicycloid(R=5, r=2)
+
+print(curve.equation)
+
+curve.show()
+
+Experiment with the radii:
+
+epicycloid(R=6, r=2).show()
+13. Hypocycloid
+
+A hypocycloid is generated by a circle rolling inside another circle.
+
+from curveforge import hypocycloid
+
+curve = hypocycloid(R=5, r=2)
+
+print(curve.equation)
+
+curve.show()
+
+Try another configuration:
+
+hypocycloid(R=8, r=2).show()
+14. Rose Curve
+
+Rose curves create petal-like mathematical patterns.
+
+Create one using:
+
+from curveforge import rose
+
+curve = rose(a=4, k=5)
+
+print(curve.equation)
+
+curve.show()
+
+Experiment with k:
+
+rose(a=4, k=3).show()
+rose(a=4, k=5).show()
+rose(a=4, k=7).show()
+
+Changing the parameters changes the number and shape of the petals.
+
+15. Lemniscate
+
+A lemniscate produces a characteristic figure-eight shape.
+
+from curveforge import lemniscate
+
+curve = lemniscate(a=5)
+
+print(curve.equation)
+
+curve.show()
+
+Save it:
+
+lemniscate(a=5).save("lemniscate.png")
+16. Getting Numerical Data
+
+CurveForge isn't only for drawing graphs.
+
+You can use the generated coordinates in your own Python programs.
+
+from curveforge import ellipse
+
+curve = ellipse(a=6, b=3)
+
+x, y = curve.points()
+
+print("Number of points:", len(x))
+print("First x:", x[0])
+print("First y:", y[0])
+
+You can increase the resolution:
+
+x, y = curve.points(n=5000)
+
+This can be useful for:
+
+numerical analysis
+simulations
+custom visualization
+geometry experiments
+engineering calculations
+exporting coordinate data
+machine-learning experiments
+17. Using CurveForge with Matplotlib
+
+Because CurveForge uses Matplotlib for visualization, you can work directly with Matplotlib.
+
+import matplotlib.pyplot as plt
+from curveforge import ellipse
+
+curve = ellipse(a=6, b=3)
+
+ax = curve.plot()
+
+ax.set_title("Ellipse")
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+
+plt.show()
+
+You can therefore combine CurveForge with your own Matplotlib workflow.
+
+For example:
+
+import matplotlib.pyplot as plt
+from curveforge import circle, ellipse
+
+circle_curve = circle(r=5)
+ellipse_curve = ellipse(a=7, b=3)
+
+circle_curve.plot()
+ellipse_curve.plot()
+
+plt.title("Two Mathematical Curves")
+plt.show()
+18. Saving Different Formats
+
+CurveForge can export graphics through Matplotlib.
+
+PNG
+
+Good for:
+
+presentations
+websites
+documentation
+normal images
+from curveforge import circle
+
+circle(r=5).save("circle.png")
+SVG
+
+Good for:
+
+vector graphics
+publications
+design software
+scalable diagrams
+circle(r=5).save("circle.svg")
+PDF
+
+Useful for:
+
+documents
+reports
+mathematical figures
+printing
+circle(r=5).save("circle.pdf")
+19. A Complete Example
+
+Here is a small program using several CurveForge features:
+
+from curveforge import ellipse
+
+# Create the curve
+curve = ellipse(a=6, b=3)
+
+# Print its equation
+print("Equation:")
+print(curve.equation)
+
+# Generate coordinates
+x, y = curve.points(n=1000)
+
+print("Number of points:", len(x))
+
+# Display the curve
+curve.show()
+
+# Save it
+curve.save("my_ellipse.png")
+
+This program:
+
+Creates an ellipse.
+Prints its equation.
+Generates 1,000 coordinate points.
+Displays the curve.
+Saves the graphic.
+20. Making a Collection of Curves
+
+You can create several curves in one program.
+
+from curveforge import (
+    circle,
+    ellipse,
+    astroid,
+    cardioid,
+    cycloid,
+)
+
+circle(r=5).save("circle.png")
+ellipse(a=6, b=3).save("ellipse.png")
+astroid(a=5).save("astroid.png")
+cardioid(a=4).save("cardioid.png")
+cycloid(r=2).save("cycloid.png")
+
+This will create five separate graphics.
+
+21. Choosing Parameters
+
+The parameters control the geometry of each curve.
+
+For example:
+
+circle(r=2)
+
+and:
+
+circle(r=10)
+
+are both circles, but with different sizes.
+
+Similarly:
+
+ellipse(a=6, b=3)
+
+and:
+
+ellipse(a=10, b=2)
+
+produce different ellipses.
+
+A useful way to learn CurveForge is simply to change one parameter at a time and observe the resulting curve.
+
+22. Beginner Experiment
+
+Try this program:
+
+from curveforge import circle, ellipse, astroid
+
+circle(r=5).show()
+ellipse(a=6, b=3).show()
+astroid(a=5).show()
+
+Then change the values:
+
+circle(r=10).show()
+ellipse(a=10, b=4).show()
+astroid(a=8).show()
+
+You are now using CurveForge to explore how mathematical parameters affect geometry.
+
+23. Common Mistake
+Wrong
+from curveforge import circle
+
+circle(a=5)
+
+For a circle, CurveForge uses:
+
+circle(r=5)
+
+because r represents the radius.
+
+Installation vs import
+
+Install:
+
+pip install curveforge-py
+
+Import:
+
+from curveforge import circle
+
+These names are intentionally different.
+
+24. Requirements
+
+CurveForge requires:
+
+Python 3.9+
+NumPy 1.24+
+Matplotlib 3.7+
+
+These dependencies are installed automatically when you install CurveForge from PyPI.
+
+25. Project Structure
+
+The source repository is organized approximately as:
+
+CurveForge/
+├── README.md
+├── LICENSE
+├── pyproject.toml
+├── examples/
+│   ├── basic.py
+│   └── all_curves.py
+├── src/
+│   └── curveforge/
+│       ├── __init__.py
+│       └── curves.py
+└── tests/
+    └── test_curves.py
+26. Running CurveForge Locally
+
+Clone the repository:
+
+git clone https://github.com/iampremacharya/CurveForge.git
+
+Enter the project:
+
+cd CurveForge
+
+Create a virtual environment:
+
+python -m venv .venv
+Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+
+Install the project:
+
+python -m pip install -e .
+
+Install test dependencies:
+
+python -m pip install -e ".[test]"
+27. Running Tests
+
+Run:
+
+python -m pytest
+
+The test suite checks the core CurveForge functionality.
+
+28. Building the Package
+
+Install the build tools:
+
+python -m pip install --upgrade build twine
+
+Build the distributions:
+
+python -m build
+
+Check them:
+
+python -m twine check dist/*
+
+The standard Python packaging workflow produces a source distribution and wheel that can be uploaded to a package index.
+
+29. Version
+
+Current release:
+
+CurveForge 1.0.2
+
+PyPI distribution:
+
+curveforge-py
+
+Python import package:
+
+curveforge
+30. Links
+PyPI
+
+https://pypi.org/project/curveforge-py/
+
+GitHub
+
+https://github.com/iampremacharya/CurveForge
+
+31. License
+
+CurveForge is released under the MIT License.
+
+See the LICENSE file for the complete license text.
+
+Why CurveForge?
+
+Mathematical curves are often introduced through equations, but understanding them becomes much easier when you can immediately see the geometry.
+
+CurveForge connects the two:
+
+Mathematical parameters
+        ↓
+Mathematical equation
+        ↓
+Numerical coordinates
+        ↓
+Visualization
+        ↓
+Exportable graphics
+
+Instead of manually writing the parameterization and plotting code every time, you can write:
+
+from curveforge import astroid
+
+astroid(a=5).show()
+
+and start exploring the mathematics immediately.
+
+Start Here
+
+If you're completely new to CurveForge, start with these three examples:
+
+from curveforge import circle
+
+circle(r=5).show()
+from curveforge import ellipse
+
+ellipse(a=6, b=3).show()
+from curveforge import astroid
+
+astroid(a=5).show()
+
+Then experiment with the parameters and use .equation, .points(), .plot(), .show(), and .save() to explore what you can do.
